@@ -42,11 +42,7 @@ public class RedRingScript : MonoBehaviour
         rings = GameObject.FindGameObjectsWithTag("Ring");
         ringCount = rings.Length;
 
-        // Loop through the array to interact with each object
-        foreach (GameObject ring in rings)
-        {
-            
-        }
+       
     }
 
     void Update()
@@ -95,7 +91,7 @@ public class RedRingScript : MonoBehaviour
     //     isDragging = false;
     // }
 
-    ////CANON code
+ 
     
 
 }
