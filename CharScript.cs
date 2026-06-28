@@ -4,47 +4,50 @@ using UnityEngine.InputSystem;
 public class CharScript : MonoBehaviour
 {
     
-    public GameObject exit;
+    private bool start = false;
+    private Vector2 endPos;
     public InputAction speedUp;
-    public float speed =1f;
-
+    public float speed;
+    private float tempSpeed;
+    // public float targetAngle = 70f;
+    // public float startX = 0f;
+    // public float startY = 0f;
+    public Vector2 travelDirection;
     
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         speedUp = InputSystem.actions.FindAction("SpeedUp");
+        travelDirection = new Vector2(0f,1f);
+        tempSpeed = speed;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, exit.transform.position, speed*Time.deltaTime);
+        if (Input.GetKey(KeyCode.A))
+        {
+            start = true;
+        }
 
-        if (speedUp.IsPressed())
+        if (start == true)
         {
-            speed = 3f;
-            // if (speed == 3f)
-            // {
-            //     speed = 1f;
-            // } else
-            // {
-            //     speed = 3f;
-            // }
-            
-        } else
-        {
-            speed = 1f;
+            endPos = (travelDirection * 1000f);
+            transform.position = Vector2.MoveTowards(transform.position, endPos, speed*Time.deltaTime);
+
+            if (speedUp.IsPressed())
+            {
+                speed = tempSpeed*3;
+                
+            } else
+            {
+                speed = tempSpeed;
+            }
         }
         
-    }
 
-    //  [SerializeField] private bool isDragging = false;
-    //  void OnMouseDown()
-    // {
-    //     Debug.Log("Mouse down");
-    //     isDragging = !isDragging;
-    // }
+        
+        
+        
+    }
 
     
 }
